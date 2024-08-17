@@ -9,7 +9,7 @@ const createBikeIntoDB = async (payload: IBike) => {
 };
 
 const getAllBikeFromDB = async () => {
-  const result = await Bike.find();
+  const result = await Bike.find({isAvailable:true});
   return result;
 };
 
@@ -22,8 +22,20 @@ const updateBikeInfoFromDB = async (id: string, payload: Partial<IBike>) => {
   return result;
 };
 
+const deleteBikeInfoFromDB = async (id: string) => {
+  const isBikeExists = await Bike.findById(id);
+  if (!isBikeExists) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Bike not found.');
+  }
+  const result = await Bike.findByIdAndUpdate(id,{isAvailable:false}, { new: true });
+  return result;
+};
+
+
+
 export const BikeServices = {
   createBikeIntoDB,
   getAllBikeFromDB,
   updateBikeInfoFromDB,
+  deleteBikeInfoFromDB
 };
