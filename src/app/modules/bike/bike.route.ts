@@ -19,4 +19,10 @@ router.get(
   BikeControllers.getAllBike,
 );
 
+router.put(
+  '/:id',
+  auth(USER_ROLE.admin),
+  BikeControllers.updateBikeInfo,
+);
+
 export const BikeRoutes = router;

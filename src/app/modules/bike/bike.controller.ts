@@ -21,8 +21,19 @@ const getAllBike = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const updateBikeInfo = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await BikeServices.updateBikeInfoFromDB(id, req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Bike updated successfully',
+    data: result,
+  });
+});
 
 export const BikeControllers = {
   createBike,
   getAllBike,
+  updateBikeInfo,
 };
