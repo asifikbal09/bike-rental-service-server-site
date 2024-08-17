@@ -1,6 +1,7 @@
 import httpStatus from 'http-status';
 import AppError from '../../error/appError';
 import { User } from './user.model';
+import { IUser } from './user.interface';
 
 const getSingleUserFromDB = async (id: string) => {
   const result = await User.findById(id).select('-password');
@@ -10,6 +11,15 @@ const getSingleUserFromDB = async (id: string) => {
   return result;
 };
 
+const updateUserInfoFromDB = async (id: string, payload: Partial<IUser>) => {
+  const result = await User.findByIdAndUpdate(id, payload, {
+    new: true,
+  }).select('-password');
+
+  return result;
+};
+
 export const UserServices = {
   getSingleUserFromDB,
+  updateUserInfoFromDB,
 };
