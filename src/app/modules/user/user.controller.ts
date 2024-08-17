@@ -1,17 +1,19 @@
-import httpStatus from "http-status";
-import catchAsync from "../../utils/catchAsync";
-import sendResponse from "../../utils/sendResponse";
+import httpStatus from 'http-status';
+import catchAsync from '../../utils/catchAsync';
+import sendResponse from '../../utils/sendResponse';
+import { UserServices } from './user.service';
 
-const createUser=catchAsync((req,res)=>{
-    const result = ''
-    sendResponse(res,{
-        statusCode:httpStatus.OK,
-        success:true,
-        message:"User registered successfully",
-        data:result
-    })
-})
+const getSingleUser = catchAsync(async (req, res) => {
+  const user = req.user;
+  const result = await UserServices.getSingleUserFromDB(user._id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User profile retrieved successfully',
+    data: result,
+  });
+});
 
-const UserControllers={
-    createUser
-}
+export const UserControllers = {
+  getSingleUser,
+};
