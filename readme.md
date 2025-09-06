@@ -21,7 +21,7 @@ A **Bike Rental Service** API built with **TypeScript, Express.js, and MongoDB**
 
 ### 1️⃣ Clone the Repository
 ```sh
-git clone https://github.com/your-username/bike-rental-service.git
+git clone https://github.com/asifikbal09/bike-rental-service.git
 cd bike-rental-service
 ```
 
